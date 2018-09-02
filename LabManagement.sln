@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManagement", "LabManagement\LabManagement.csproj", "{34C40423-DEC4-468B-882F-342FBDB61193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManagmentWPF", "LabManagmentWPF\LabManagmentWPF.csproj", "{4F15CA86-41CD-4E37-9312-67324A25301D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34C40423-DEC4-468B-882F-342FBDB61193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C40423-DEC4-468B-882F-342FBDB61193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C40423-DEC4-468B-882F-342FBDB61193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C40423-DEC4-468B-882F-342FBDB61193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F15CA86-41CD-4E37-9312-67324A25301D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F15CA86-41CD-4E37-9312-67324A25301D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F15CA86-41CD-4E37-9312-67324A25301D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F15CA86-41CD-4E37-9312-67324A25301D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39FFB366-E60D-45B5-9F61-54C6384EC70C}
+	EndGlobalSection
+EndGlobal
