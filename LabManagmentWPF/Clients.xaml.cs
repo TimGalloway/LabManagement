@@ -25,5 +25,18 @@ namespace LabManagmentWPF
             Client b = (Client)a.SelectedItem;
             this.vbClient.DataContext = b;
         }
+
+        private void btnSaveClient_Click(object sender, RoutedEventArgs e)
+        {
+            Client b = (Client)sender;
+            //using (var db = new LabManagementWPF_model())
+            //{
+            //    var result = db.Clients.SingleOrDefault(b => b.ID == sender.ID);
+            //    if (result != null)
+            //    {
+            //        result.
+            //    }
+            //}
+        }
     }
 }

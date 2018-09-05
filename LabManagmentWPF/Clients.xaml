@@ -44,6 +44,7 @@
             <TextBox Text="{Binding PhoneNumber}" Margin="10" Grid.Row="2" Grid.Column="1"></TextBox>
             <TextBox Text="{Binding PostalAddress}" Margin="10" Grid.Row="3" Grid.Column="1"></TextBox>
             <TextBox Text="{Binding ContactName}" Margin="10" Grid.Row="4" Grid.Column="1"></TextBox>
+            <Button x:Name="btnSaveClient" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="174,35,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Click="btnSaveClient_Click"/>
         </Grid>
     </Grid>
 </Window>
