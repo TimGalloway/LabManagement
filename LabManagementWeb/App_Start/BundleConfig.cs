@@ -1,11 +1,21 @@
-﻿using System.Web;
-using System.Web.Optimization;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="GallowayConsulting">
+//  BundleConfig
+// </copyright>
+//-----------------------------------------------------------------------
 namespace LabManagementWeb
 {
+    using System.Web.Optimization;
+
+    /// <summary>
+    /// BundleConfig class
+    /// </summary>
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+        /// <summary>
+        /// RegisterBundles method
+        /// </summary>
+        /// <param name="bundles">A collection of bundles</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

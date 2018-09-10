@@ -1,126 +1,172 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using LabManagementWeb.Models;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClientsController.cs" company="GallowayConsulting">
+//  Clients Controller
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace LabManagementWeb.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using LabManagementWeb.Models;
+
+    /// <summary>
+    /// Clients Controller class
+    /// </summary>
     public class ClientsController : Controller
     {
+        /// <summary>
+        /// Private instance of the application context
+        /// </summary>
         private ApplicationDBContext db = new ApplicationDBContext();
 
-        // GET: Clients
+        /// <summary>
+        /// GET: Clients
+        /// </summary>
+        /// <returns>Client view</returns>
         public ActionResult Index()
         {
-            return View(db.Clients.ToList());
+            return this.View(this.db.Clients.ToList());
         }
 
-        // GET: Clients/Details/5
+        /// <summary>
+        /// GET: Clients/Details/5
+        /// </summary>
+        /// <param name="id">Client ID</param>
+        /// <returns>Client view</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+
+            Client client = this.db.Clients.Find(id);
             if (client == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(client);
+
+            return this.View(client);
         }
 
-        // GET: Clients/Create
+        /// <summary>
+        /// GET: Clients/Create
+        /// </summary>
+        /// <returns>Client view</returns>
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
-        // POST: Clients/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Clients/Create
+        /// </summary>
+        /// <param name="client">Client model</param>
+        /// <returns>Client view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,PhoneNumber,PostalAddress,ContactName,DateCreated,DateModified")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Clients.Add(client);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.db.Clients.Add(client);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
             }
 
-            return View(client);
+            return this.View(client);
         }
 
-        // GET: Clients/Edit/5
+        /// <summary>
+        /// GET: Clients/Edit/5
+        /// </summary>
+        /// <param name="id">Client ID</param>
+        /// <returns>Client view</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+
+            Client client = this.db.Clients.Find(id);
             if (client == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(client);
+
+            return this.View(client);
         }
 
-        // POST: Clients/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Clients/Edit/5 
+        /// </summary>
+        /// <param name="client">Client model</param>
+        /// <returns>Client view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Address,PhoneNumber,PostalAddress,ContactName,DateCreated,DateModified")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.db.Entry(client).State = EntityState.Modified;
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
             }
-            return View(client);
+
+            return this.View(client);
         }
 
-        // GET: Clients/Delete/5
+        /// <summary>
+        /// GET: Clients/Delete/5 
+        /// </summary>
+        /// <param name="id">Client ID</param>
+        /// <returns>Client view</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+
+            Client client = this.db.Clients.Find(id);
             if (client == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(client);
+
+            return this.View(client);
         }
 
-        // POST: Clients/Delete/5
+        /// <summary>
+        /// POST: Clients/Delete/5 
+        /// </summary>
+        /// <param name="id">Client ID</param>
+        /// <returns>Redirect to index</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Client client = db.Clients.Find(id);
-            db.Clients.Remove(client);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Client client = this.db.Clients.Find(id);
+            this.db.Clients.Remove(client);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing">Disposing True or False</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
