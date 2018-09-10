@@ -19,6 +19,11 @@
             Http header name to carry the correlation context.
             </summary>
         </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.MaxCorrelationContextLength">
+            <summary>
+            Maximum length of Correlation-Context herader value.
+            </summary>
+        </member>
         <member name="M:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.Extract(System.Diagnostics.Activity,System.Collections.Specialized.NameValueCollection)">
             <summary>
             Reads Request-Id and Correlation-Context headers and sets ParentId and Baggage on Activity.
@@ -121,6 +126,16 @@
             </summary>
             <param name="contextItems">HttpContext.Items dictionary.</param>
         </member>
+        <member name="T:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource">
+            <summary>
+            ETW EventSource tracing class.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource.Log">
+            <summary>
+            Instance of the PlatformEventSource class.
+            </summary>
+        </member>
         <member name="T:Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule">
             <summary>
             Http Module sets ambient state using Activity API from DiagnosticsSource package.
@@ -138,16 +153,6 @@
             </summary>
             <param name="context">HttpContext instance.</param>
             <param name="step">Step to be executed.</param>
-        </member>
-        <member name="T:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource">
-            <summary>
-            ETW EventSource tracing class.
-            </summary>
-        </member>
-        <member name="F:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource.Log">
-            <summary>
-            Instance of the PlatformEventSource class.
-            </summary>
         </member>
     </members>
 </doc>
