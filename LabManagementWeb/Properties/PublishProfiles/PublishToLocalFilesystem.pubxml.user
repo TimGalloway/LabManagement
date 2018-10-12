@@ -22,10 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2018 09:31:15</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/12/2018 19:34:23</publishTime>
+      <publishTime>09/27/2018 21:47:57</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/12/2018 19:34:22</publishTime>
+      <publishTime>09/27/2018 21:47:57</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -34,10 +34,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/LabManagementWeb.dll">
-      <publishTime>09/12/2018 16:53:17</publishTime>
+      <publishTime>09/27/2018 21:46:11</publishTime>
     </File>
     <File Include="bin/LabManagementWeb.pdb">
-      <publishTime>09/12/2018 16:53:17</publishTime>
+      <publishTime>09/27/2018 21:46:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>06/27/2017 12:59:34</publishTime>
@@ -280,7 +280,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/02/2018 21:50:05</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/12/2018 19:34:09</publishTime>
+      <publishTime>09/27/2018 21:47:47</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>09/03/2018 09:31:08</publishTime>
@@ -415,7 +415,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2018 10:10:13</publishTime>
     </File>
     <File Include="Views/Clients/Create.cshtml">
-      <publishTime>09/03/2018 07:49:30</publishTime>
+      <publishTime>09/27/2018 21:39:45</publishTime>
     </File>
     <File Include="Views/Clients/Delete.cshtml">
       <publishTime>09/03/2018 07:49:33</publishTime>
@@ -463,7 +463,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2018 09:19:36</publishTime>
     </File>
     <File Include="Views/JobTypes/Edit.cshtml">
-      <publishTime>09/03/2018 09:19:37</publishTime>
+      <publishTime>09/27/2018 21:39:45</publishTime>
     </File>
     <File Include="Views/JobTypes/Index.cshtml">
       <publishTime>09/03/2018 19:42:25</publishTime>
