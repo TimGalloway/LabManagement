@@ -78,7 +78,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,DateCreated,UserCreated,DateModified,UserModified")] JobType jobType)
+        public ActionResult Edit([Bind(Include = "ID,Prefix,Description,DateCreated,UserCreated,DateModified,UserModified")] JobType jobType)
         {
             if (ModelState.IsValid)
             {
