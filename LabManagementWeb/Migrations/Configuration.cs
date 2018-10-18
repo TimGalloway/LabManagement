@@ -9,9 +9,20 @@ namespace LabManagementWeb.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<LabManagementWeb.Models.ApplicationDBContext>
     {
+        private bool _pendingMigrations;
+
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
+            var migrator = new DbMigrator(this);
+            _pendingMigrations = migrator.GetPendingMigrations().Any();
+
+            // If there are pending migrations run migrator.Update() to create/update the
+            // database then run the Seed() method to populate the data if necessary.
+            if (_pendingMigrations)
+            {
+                migrator.Update();
+            }
         }
 
         protected override void Seed(LabManagementWeb.Models.ApplicationDBContext context)
@@ -94,6 +105,14 @@ namespace LabManagementWeb.Migrations
                 JobType_ID = 2
             });
             context.Jobs.AddRange(defaultJobs);
+
+            IList<UserProfile> defaultUserProfile = new List<UserProfile>();
+            defaultUserProfile.Add(new UserProfile()
+            {
+                UserName = "tim",
+                Password = "tl1000"
+            });
+            context.UserProfiles.AddRange(defaultUserProfile);
         }
     }   
     }

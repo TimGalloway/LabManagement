@@ -48,5 +48,8 @@ namespace LabManagementWeb.Models
         public System.Data.Entity.DbSet<LabManagementWeb.Models.JobType> JobTypes { get; set; }
 
         public System.Data.Entity.DbSet<LabManagementWeb.Models.Job> Jobs { get; set; }
+
+        public System.Data.Entity.DbSet<LabManagementWeb.Models.UserProfile> UserProfiles { get; set; }
+
     }
- }
+}

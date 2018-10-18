@@ -17,15 +17,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarManage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @Html.ActionLink("Clients", "Index", "Clients", null, new { @class = "dropdown-item" })
-                        @Html.ActionLink("Jobs", "Index", "Jobs", null, new { @class = "dropdown-item" })
-                        @Html.ActionLink("JobTypes", "Index", "JobTypes", null, new { @class = "dropdown-item" })
-                    </div>
+                @if (Session["UserName"] != null)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarManage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Manage
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Clients", "Index", "Clients", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Jobs", "Index", "Jobs", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("JobTypes", "Index", "JobTypes", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
+                }
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
             </ul>
