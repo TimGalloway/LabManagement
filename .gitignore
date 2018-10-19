@@ -6,3 +6,4 @@ packages/
 .vs/
 LabManagementWeb/bin/LabManagementWeb.dll
 LabManagementWeb/bin/LabManagementWeb.pdb
+LabManagementWeb/bin/
