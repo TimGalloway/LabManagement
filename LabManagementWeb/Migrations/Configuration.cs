@@ -14,15 +14,15 @@ namespace LabManagementWeb.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            var migrator = new DbMigrator(this);
-            _pendingMigrations = migrator.GetPendingMigrations().Any();
+            //var migrator = new DbMigrator(this);
+            //_pendingMigrations = migrator.GetPendingMigrations().Any();
 
             // If there are pending migrations run migrator.Update() to create/update the
             // database then run the Seed() method to populate the data if necessary.
-            if (_pendingMigrations)
-            {
-                migrator.Update();
-            }
+            //if (_pendingMigrations)
+            //{
+            //    migrator.Update();
+            //}
         }
 
         protected override void Seed(LabManagementWeb.Models.ApplicationDBContext context)

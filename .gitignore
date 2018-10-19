@@ -1,7 +1,9 @@
 LabManagement/obj/
+LabManagement/bin/
 LabManagmentWPF/obj/
 LabManagementWeb/obj/
 LabManagmentWPF/bin/
+LabManagmentWPF/obj/
 packages/
 .vs/
 LabManagementWeb/bin/LabManagementWeb.dll
