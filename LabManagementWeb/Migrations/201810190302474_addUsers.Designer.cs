@@ -7,13 +7,13 @@ namespace LabManagementWeb.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addUserProfile : IMigrationMetadata
+    public sealed partial class addUsers : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addUserProfile));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addUsers));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810151402360_addUserProfile"; }
+            get { return "201810190302474_addUsers"; }
         }
         
         string IMigrationMetadata.Source

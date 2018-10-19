@@ -9,7 +9,7 @@ namespace LabManagementWeb.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<LabManagementWeb.Models.ApplicationDBContext>
     {
-        private bool _pendingMigrations;
+        //private bool _pendingMigrations;
 
         public Configuration()
         {
@@ -106,13 +106,26 @@ namespace LabManagementWeb.Migrations
             });
             context.Jobs.AddRange(defaultJobs);
 
-            IList<UserProfile> defaultUserProfile = new List<UserProfile>();
-            defaultUserProfile.Add(new UserProfile()
+            IList<Role> defaultRole = new List<Role>();
+            defaultRole.Add(new Role()
             {
-                UserName = "tim",
-                Password = "tl1000"
+                RoleName = "Admin",
+                Description = "Administrator"
             });
-            context.UserProfiles.AddRange(defaultUserProfile);
+            context.Roles.AddRange(defaultRole);
+
+            IList<User> defaultUser = new List<User>();
+            defaultUser.Add(new User()
+            {
+                Username = "tim",
+                Email = "galloway@iinet.net.au",
+                Password = "tl1000",
+                FirstName = "Tim",
+                LastName = "Galloway",
+                IsActive = true,
+                Roles = defaultRole
+            });
+            context.Users.AddRange(defaultUser);
         }
     }   
     }

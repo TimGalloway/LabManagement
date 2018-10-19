@@ -16,17 +16,17 @@ namespace LabManagementWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserProfile objUser)
+        public ActionResult Login(User objUser)
         {
             if (ModelState.IsValid)
             {
                 using (ApplicationDBContext db = new ApplicationDBContext())
                 {
-                    var obj = db.UserProfiles.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    var obj = db.Users.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
                     if (obj != null)
                     {
-                        Session["UserID"] = obj.ID.ToString();
-                        Session["UserName"] = obj.UserName.ToString();
+                        Session["UserID"] = obj.UserId.ToString();
+                        Session["UserName"] = obj.Username.ToString();
                         return RedirectToAction("UserDashBoard");
                     }
                 }
