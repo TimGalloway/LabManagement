@@ -7,3 +7,5 @@ packages/
 LabManagementWeb/bin/LabManagementWeb.dll
 LabManagementWeb/bin/LabManagementWeb.pdb
 LabManagementWeb/bin/
+ScaleService/bin/
+ScaleService/obj/

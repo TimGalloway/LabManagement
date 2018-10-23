@@ -212,10 +212,16 @@
     <Compile Include="Migrations\201810190631447_addClients.Designer.cs">
       <DependentUpon>201810190631447_addClients.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810211354411_addClientAddress.cs" />
+    <Compile Include="Migrations\201810211354411_addClientAddress.Designer.cs">
+      <DependentUpon>201810211354411_addClientAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\ClientAddress.cs" />
+    <Compile Include="Models\ClientAddressType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobType.cs" />
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810190631447_addClients.resx">
       <DependentUpon>201810190631447_addClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810211354411_addClientAddress.resx">
+      <DependentUpon>201810211354411_addClientAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
