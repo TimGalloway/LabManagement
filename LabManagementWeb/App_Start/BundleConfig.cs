@@ -24,6 +24,7 @@ namespace LabManagementWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/navbar-fixed-top.css",
                       "~/Content/site.css"));
         }
     }

@@ -28,7 +28,7 @@ namespace ScaleService
     internal class WebServer
     {
         private const uint BufferSize = 8192;
-        private int iCount;
+        //private int iCount;
         public bool Start()
         {
             try
