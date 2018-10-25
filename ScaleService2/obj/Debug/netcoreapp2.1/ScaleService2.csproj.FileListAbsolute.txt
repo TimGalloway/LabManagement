@@ -1,0 +1,14 @@
+E:\source\LabManagement\ScaleService2\bin\Debug\netcoreapp2.1\ScaleService2.deps.json
+E:\source\LabManagement\ScaleService2\bin\Debug\netcoreapp2.1\ScaleService2.runtimeconfig.json
+E:\source\LabManagement\ScaleService2\bin\Debug\netcoreapp2.1\ScaleService2.runtimeconfig.dev.json
+E:\source\LabManagement\ScaleService2\bin\Debug\netcoreapp2.1\ScaleService2.dll
+E:\source\LabManagement\ScaleService2\bin\Debug\netcoreapp2.1\ScaleService2.pdb
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.csprojAssemblyReference.cache
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.csproj.CoreCompileInputs.cache
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.RazorAssemblyInfo.cache
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.RazorAssemblyInfo.cs
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.AssemblyInfoInputs.cache
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.AssemblyInfo.cs
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.RazorTargetAssemblyInfo.cache
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.dll
+E:\source\LabManagement\ScaleService2\obj\Debug\netcoreapp2.1\ScaleService2.pdb

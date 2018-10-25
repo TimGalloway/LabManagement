@@ -342,6 +342,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageLinkExtensions.cs" />
     <Compile Include="Migrations\201810190447146_InitialCreate.cs" />
     <Compile Include="Migrations\201810190447146_InitialCreate.Designer.cs">
       <DependentUpon>201810190447146_InitialCreate.cs</DependentUpon>
@@ -358,12 +359,14 @@
     <Compile Include="Migrations\201810211354411_addClientAddress.Designer.cs">
       <DependentUpon>201810211354411_addClientAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810251133255_removeClientAddress.cs" />
+    <Compile Include="Migrations\201810251133255_removeClientAddress.Designer.cs">
+      <DependentUpon>201810251133255_removeClientAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\ClientAddress.cs" />
-    <Compile Include="Models\ClientAddressType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobType.cs" />
@@ -385,6 +388,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Jinning.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -506,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810211354411_addClientAddress.resx">
       <DependentUpon>201810211354411_addClientAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251133255_removeClientAddress.resx">
+      <DependentUpon>201810251133255_removeClientAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
