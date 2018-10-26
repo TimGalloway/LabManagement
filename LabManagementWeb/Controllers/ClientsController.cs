@@ -46,7 +46,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,DateCreated,DateModified")] Client client)
+        public ActionResult Create([Bind(Include = "ID,Name,Company,MailingAddress,EmailAddress,PhoneNumber,FaxNumber,SendInvToSame,InvoiceName,InvoiceCompany,InvoiceMailingAddress,InvoiceEmailAddress,InvoicePhoneNumber,InvoiceFaxNumber,DateCreated, DateModified")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,DateCreated,DateModified")] Client client)
+        public ActionResult Edit([Bind(Include = "ID,Name,Company,MailingAddress,EmailAddress,PhoneNumber,FaxNumber,SendInvToSame,InvoiceName,InvoiceCompany,InvoiceMailingAddress,InvoiceEmailAddress,InvoicePhoneNumber,InvoiceFaxNumber,DateCreated, DateModified")] Client client)
         {
             if (ModelState.IsValid)
             {
