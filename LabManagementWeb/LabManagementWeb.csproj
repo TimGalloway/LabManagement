@@ -363,6 +363,10 @@
     <Compile Include="Migrations\201810251133255_removeClientAddress.Designer.cs">
       <DependentUpon>201810251133255_removeClientAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810260510307_addFieldsToClientAndJob.cs" />
+    <Compile Include="Migrations\201810260510307_addFieldsToClientAndJob.Designer.cs">
+      <DependentUpon>201810260510307_addFieldsToClientAndJob.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -513,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810251133255_removeClientAddress.resx">
       <DependentUpon>201810251133255_removeClientAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810260510307_addFieldsToClientAndJob.resx">
+      <DependentUpon>201810260510307_addFieldsToClientAndJob.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
