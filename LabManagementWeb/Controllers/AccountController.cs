@@ -15,6 +15,8 @@ namespace LabManagementWeb.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -79,6 +81,13 @@ namespace LabManagementWeb.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    AuditLog lAuditLog = new AuditLog();
+                    lAuditLog.AuditAction = "Login";
+                    lAuditLog.AuditUser = model.Email;
+                    lAuditLog.AuditTime = DateTime.Now;
+                    db.AuditLogs.Add(lAuditLog);
+                    db.SaveChanges();
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

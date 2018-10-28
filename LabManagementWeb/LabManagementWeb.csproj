@@ -367,8 +367,13 @@
     <Compile Include="Migrations\201810260510307_addFieldsToClientAndJob.Designer.cs">
       <DependentUpon>201810260510307_addFieldsToClientAndJob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810261517215_addAuditLog.cs" />
+    <Compile Include="Migrations\201810261517215_addAuditLog.Designer.cs">
+      <DependentUpon>201810261517215_addAuditLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -520,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810260510307_addFieldsToClientAndJob.resx">
       <DependentUpon>201810260510307_addFieldsToClientAndJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261517215_addAuditLog.resx">
+      <DependentUpon>201810261517215_addAuditLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

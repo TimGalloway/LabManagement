@@ -68,5 +68,6 @@ namespace LabManagementWeb.Models
         public DbSet<JobType> JobTypes { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
     }
 }
