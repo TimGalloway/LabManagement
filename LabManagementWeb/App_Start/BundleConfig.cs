@@ -26,6 +26,9 @@ namespace LabManagementWeb
                       "~/Content/bootstrap.css",
                       "~/Content/navbar-fixed-top.css",
                       "~/Content/Site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Custom").Include(
+                      "~/Scripts/Clients.js"));
         }
     }
 }
