@@ -12,12 +12,14 @@ namespace LabManagementWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Jobs
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Jobs.ToList());
         }
 
         // GET: Jobs/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -33,6 +35,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Jobs/Create
+        [Authorize]
         public ActionResult Create()
         {
             var jobTypeList = (from jt in db.JobTypes select jt);
@@ -46,6 +49,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID")] Job job)
         {
             if (ModelState.IsValid)
@@ -64,6 +68,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID")] Job job)
         {
             if (ModelState.IsValid)
@@ -103,6 +109,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,6 +127,7 @@ namespace LabManagementWeb.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Job job = db.Jobs.Find(id);

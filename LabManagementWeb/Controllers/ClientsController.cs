@@ -15,12 +15,14 @@ namespace LabManagementWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Clients
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Clients.ToList());
         }
 
         // GET: Clients/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Clients/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Name,Company,MailingAddress,EmailAddress,PhoneNumber,FaxNumber,SendInvToSame,InvoiceName,InvoiceCompany,InvoiceMailingAddress,InvoiceEmailAddress,InvoicePhoneNumber,InvoiceFaxNumber,DateCreated, DateModified")] Client client)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Clients/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Name,Company,MailingAddress,EmailAddress,PhoneNumber,FaxNumber,SendInvToSame,InvoiceName,InvoiceCompany,InvoiceMailingAddress,InvoiceEmailAddress,InvoicePhoneNumber,InvoiceFaxNumber,DateCreated, DateModified")] Client client)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: Clients/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace LabManagementWeb.Controllers
         // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Client client = db.Clients.Find(id);

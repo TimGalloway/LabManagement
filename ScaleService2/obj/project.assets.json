@@ -11507,11 +11507,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\LabManagement\\ScaleService2\\ScaleService2.csproj",
+      "projectUniqueName": "E:\\source\\LabManagement\\ScaleService2\\ScaleService2.csproj",
       "projectName": "ScaleService2",
-      "projectPath": "C:\\Source\\LabManagement\\ScaleService2\\ScaleService2.csproj",
+      "projectPath": "E:\\source\\LabManagement\\ScaleService2\\ScaleService2.csproj",
       "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
-      "outputPath": "C:\\Source\\LabManagement\\ScaleService2\\obj\\",
+      "outputPath": "E:\\source\\LabManagement\\ScaleService2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

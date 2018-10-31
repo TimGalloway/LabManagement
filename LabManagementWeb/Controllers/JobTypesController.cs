@@ -15,12 +15,14 @@ namespace LabManagementWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: JobTypes
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.JobTypes.ToList());
         }
 
         // GET: JobTypes/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: JobTypes/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Description,Prefix,DateCreated,UserCreated,DateModified,UserModified")] JobType jobType)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: JobTypes/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace LabManagementWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Description,Prefix,DateCreated,UserCreated,DateModified,UserModified")] JobType jobType)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace LabManagementWeb.Controllers
         }
 
         // GET: JobTypes/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace LabManagementWeb.Controllers
         // POST: JobTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             JobType jobType = db.JobTypes.Find(id);
