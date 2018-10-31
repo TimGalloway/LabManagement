@@ -371,6 +371,10 @@
     <Compile Include="Migrations\201810261517215_addAuditLog.Designer.cs">
       <DependentUpon>201810261517215_addAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810310345087_alteredJobSampleOtherDetails.cs" />
+    <Compile Include="Migrations\201810310345087_alteredJobSampleOtherDetails.Designer.cs">
+      <DependentUpon>201810310345087_alteredJobSampleOtherDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuditLog.cs" />
@@ -529,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810261517215_addAuditLog.resx">
       <DependentUpon>201810261517215_addAuditLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810310345087_alteredJobSampleOtherDetails.resx">
+      <DependentUpon>201810310345087_alteredJobSampleOtherDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

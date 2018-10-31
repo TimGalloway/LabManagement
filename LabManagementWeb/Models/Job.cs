@@ -34,7 +34,7 @@ namespace LabManagementWeb.Models
         public bool SampleTypeSOLUTIONS { get; set; }
         public bool SampleTypesMMI { get; set; }
         public bool SampleTypeOTHER { get; set; }
-        public bool SampleTypeOTHERDetails { get; set; }
+        public string SampleTypeOTHERDetails { get; set; }
 
         public int JobType_ID { get; set; }
 
