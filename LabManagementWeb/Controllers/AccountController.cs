@@ -398,8 +398,15 @@ namespace LabManagementWeb.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public ActionResult LogOff(string userName)
         {
+            AuditLog lAuditLog = new AuditLog();
+            lAuditLog.AuditAction = "Logout";
+            lAuditLog.AuditUser = userName;
+            lAuditLog.AuditTime = DateTime.Now;
+            db.AuditLogs.Add(lAuditLog);
+            db.SaveChanges();
+
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
