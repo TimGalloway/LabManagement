@@ -1,9 +1,14 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using LabManagementWeb.Models;
+using LabManagementWeb.ViewModels;
 
 namespace LabManagementWeb.Controllers
 {
@@ -31,7 +36,12 @@ namespace LabManagementWeb.Controllers
             {
                 return HttpNotFound();
             }
-            return View(job);
+            List<Sample> samples = db.Samples.Where(a => a.Job_ID == id).ToList();
+
+            JobsSamplesViewModel jobsSamplesViewModel = new JobsSamplesViewModel();
+            jobsSamplesViewModel.job = job;
+            jobsSamplesViewModel.samples = samples;
+            return View(jobsSamplesViewModel);
         }
 
         // GET: Jobs/Create
@@ -50,7 +60,7 @@ namespace LabManagementWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID")] Job job)
+        public ActionResult Create([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID,SampleIDStart, SampleIDEnd")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +69,19 @@ namespace LabManagementWeb.Controllers
                 db.SaveChanges();
 
                 job.JobNumber = job.JobType.Prefix + job.ID;
+                db.SaveChanges();
+
+                //Create samples records using SampleIDStart and SampleIDEnd
+                for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
+                {
+                    Sample newSample = new Sample
+                    {
+                        Job = job,
+                        Job_ID = job.ID,
+                        SampleID = sampleLoop
+                    };
+                    db.Samples.Add(newSample);
+                }
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -92,7 +115,7 @@ namespace LabManagementWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID")] Job job)
+        public ActionResult Edit([Bind(Include = "ID,JobNumber,SubmissionReference,BulkaBagNumber,ClientOrder,SendReportQLAB,SendReportEmail,SendReportOther,SendReportOtherDetails,Dispose,Stored,StoredUntil,ReturnedToClient,ReturnByCourier,ReturnByCourierAccnt,SampleTypeRABRC,SampleTypeMETPLANT,SampleTypeUMPIREPARTY,SampleTypePULPS,SampleTypeSOILS,SampleTypeCOREROCKS,SampleTypeSOLUTIONS,SampleTypesMMI,SampleTypeOTHER,SampleTypeOTHERDetails,DateCreated,UserCreated,DateModified,UserModified,JobType_ID,SampleIDStart, SampleIDEnd")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -101,6 +124,23 @@ namespace LabManagementWeb.Controllers
                 db.SaveChanges();
 
                 job.JobNumber = job.JobType.Prefix + job.ID;
+                db.SaveChanges();
+
+                //Create samples records using SampleIDStart and SampleIDEnd
+                for (int sampleLoop = job.SampleIDStart; sampleLoop <= job.SampleIDEnd; sampleLoop++)
+                {
+                    Sample newSample = new Sample
+                    {
+                        Job = job,
+                        Job_ID = job.ID,
+                        SampleID = sampleLoop
+                    };
+                    Sample testSample = (Sample) db.Samples.Where(a => a.SampleID == sampleLoop).FirstOrDefault<Sample>();
+                    if (testSample == null)
+                    {
+                        db.Samples.Add(newSample);
+                    }
+                }
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -134,6 +174,62 @@ namespace LabManagementWeb.Controllers
             db.Jobs.Remove(job);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // LabelsPDF
+        [Authorize]
+        public ActionResult LabelsPDF(int? id)
+        {
+            // Open a new PDF document
+
+            const int pageMargin = 5;
+            const int pageRows = 5;
+            const int pageCols = 2;
+
+            var doc = new Document();
+            doc.SetMargins(pageMargin, pageMargin, pageMargin, pageMargin);
+            var memoryStream = new MemoryStream();
+
+            var pdfWriter = PdfWriter.GetInstance(doc, memoryStream);
+            doc.Open();
+
+            PdfPTable table = new PdfPTable(pageCols);
+            table.WidthPercentage = 100f;
+            table.DefaultCell.Border = 0;
+
+            var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+
+            var samples = (from s in db.Samples
+                           where s.Job_ID == id
+                           select s).ToList();
+            foreach (var sample in samples)
+            {
+                PdfPCell cell = new PdfPCell();
+                cell.Border = 0;
+                cell.FixedHeight = (doc.PageSize.Height - (pageMargin * 2)) / pageRows;
+                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+
+                var contents = new Paragraph();
+                contents.Alignment = Element.ALIGN_CENTER;
+
+                contents.Add(new Chunk(string.Format("Thing #{0}\n", sample.SampleID), new Font(baseFont, 11f, Font.BOLD)));
+                contents.Add(new Chunk(string.Format("Thing Name: {0}\n", sample.SampleID), new Font(baseFont, 8f)));
+
+                cell.AddElement(contents);
+                table.AddCell(cell);
+
+            }
+
+            table.CompleteRow();
+            doc.Add(table);
+
+            // Close PDF document and send
+
+            pdfWriter.CloseStream = false;
+            doc.Close();
+            memoryStream.Position = 0;
+
+            return File(memoryStream, "application/pdf");
         }
 
         protected override void Dispose(bool disposing)

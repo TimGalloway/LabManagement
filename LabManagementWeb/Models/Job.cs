@@ -36,6 +36,9 @@ namespace LabManagementWeb.Models
         public bool SampleTypeOTHER { get; set; }
         public string SampleTypeOTHERDetails { get; set; }
 
+        public int SampleIDStart { get; set; }
+        public int SampleIDEnd { get; set; }
+
         public int JobType_ID { get; set; }
 
         public virtual JobType JobType { get; set; }

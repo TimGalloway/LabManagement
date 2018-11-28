@@ -1,4 +1,4 @@
-﻿@model LabManagementWeb.Models.Job
+﻿@model LabManagementWeb.ViewModels.JobsSamplesViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,240 +11,285 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.JobNumber)
+            @Html.DisplayNameFor(model => model.job.JobNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobNumber)
+            @Html.DisplayFor(model => model.job.JobNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.JobType.Description)
+            @Html.DisplayNameFor(model => model.job.JobType.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobType.Description)
+            @Html.DisplayFor(model => model.job.JobType.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SubmissionReference)
+            @Html.DisplayNameFor(model => model.job.SubmissionReference)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SubmissionReference)
+            @Html.DisplayFor(model => model.job.SubmissionReference)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BulkaBagNumber)
+            @Html.DisplayNameFor(model => model.job.BulkaBagNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BulkaBagNumber)
+            @Html.DisplayFor(model => model.job.BulkaBagNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ClientOrder)
+            @Html.DisplayNameFor(model => model.job.ClientOrder)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ClientOrder)
+            @Html.DisplayFor(model => model.job.ClientOrder)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SendReportQLAB)
+            @Html.DisplayNameFor(model => model.job.SendReportQLAB)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SendReportQLAB)
+            @Html.DisplayFor(model => model.job.SendReportQLAB)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SendReportEmail)
+            @Html.DisplayNameFor(model => model.job.SendReportEmail)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SendReportEmail)
+            @Html.DisplayFor(model => model.job.SendReportEmail)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SendReportOther)
+            @Html.DisplayNameFor(model => model.job.SendReportOther)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SendReportOther)
+            @Html.DisplayFor(model => model.job.SendReportOther)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SendReportOtherDetails)
+            @Html.DisplayNameFor(model => model.job.SendReportOtherDetails)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SendReportOtherDetails)
+            @Html.DisplayFor(model => model.job.SendReportOtherDetails)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dispose)
+            @Html.DisplayNameFor(model => model.job.Dispose)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Dispose)
+            @Html.DisplayFor(model => model.job.Dispose)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Stored)
+            @Html.DisplayNameFor(model => model.job.Stored)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Stored)
+            @Html.DisplayFor(model => model.job.Stored)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StoredUntil)
+            @Html.DisplayNameFor(model => model.job.StoredUntil)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StoredUntil)
+            @Html.DisplayFor(model => model.job.StoredUntil)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReturnedToClient)
+            @Html.DisplayNameFor(model => model.job.ReturnedToClient)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReturnedToClient)
+            @Html.DisplayFor(model => model.job.ReturnedToClient)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReturnByCourier)
+            @Html.DisplayNameFor(model => model.job.ReturnByCourier)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReturnByCourier)
+            @Html.DisplayFor(model => model.job.ReturnByCourier)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReturnByCourierAccnt)
+            @Html.DisplayNameFor(model => model.job.ReturnByCourierAccnt)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReturnByCourierAccnt)
+            @Html.DisplayFor(model => model.job.ReturnByCourierAccnt)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeRABRC)
+            @Html.DisplayNameFor(model => model.job.SampleTypeRABRC)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeRABRC)
+            @Html.DisplayFor(model => model.job.SampleTypeRABRC)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeMETPLANT)
+            @Html.DisplayNameFor(model => model.job.SampleTypeMETPLANT)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeMETPLANT)
+            @Html.DisplayFor(model => model.job.SampleTypeMETPLANT)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeUMPIREPARTY)
+            @Html.DisplayNameFor(model => model.job.SampleTypeUMPIREPARTY)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeUMPIREPARTY)
+            @Html.DisplayFor(model => model.job.SampleTypeUMPIREPARTY)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypePULPS)
+            @Html.DisplayNameFor(model => model.job.SampleTypePULPS)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypePULPS)
+            @Html.DisplayFor(model => model.job.SampleTypePULPS)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeSOILS)
+            @Html.DisplayNameFor(model => model.job.SampleTypeSOILS)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeSOILS)
+            @Html.DisplayFor(model => model.job.SampleTypeSOILS)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeCOREROCKS)
+            @Html.DisplayNameFor(model => model.job.SampleTypeCOREROCKS)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeCOREROCKS)
+            @Html.DisplayFor(model => model.job.SampleTypeCOREROCKS)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeSOLUTIONS)
+            @Html.DisplayNameFor(model => model.job.SampleTypeSOLUTIONS)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeSOLUTIONS)
+            @Html.DisplayFor(model => model.job.SampleTypeSOLUTIONS)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypesMMI)
+            @Html.DisplayNameFor(model => model.job.SampleTypesMMI)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypesMMI)
+            @Html.DisplayFor(model => model.job.SampleTypesMMI)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeOTHER)
+            @Html.DisplayNameFor(model => model.job.SampleTypeOTHER)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeOTHER)
+            @Html.DisplayFor(model => model.job.SampleTypeOTHER)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SampleTypeOTHERDetails)
+            @Html.DisplayNameFor(model => model.job.SampleTypeOTHERDetails)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SampleTypeOTHERDetails)
+            @Html.DisplayFor(model => model.job.SampleTypeOTHERDetails)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            @Html.DisplayNameFor(model => model.job.SampleIDStart)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateCreated)
+            @Html.DisplayFor(model => model.job.SampleIDStart)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserCreated)
+            @Html.DisplayNameFor(model => model.job.SampleIDEnd)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserCreated)
+            @Html.DisplayFor(model => model.job.SampleIDEnd)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateModified)
+            @Html.DisplayNameFor(model => model.job.DateCreated)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateModified)
+            @Html.DisplayFor(model => model.job.DateCreated)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserModified)
+            @Html.DisplayNameFor(model => model.job.UserCreated)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserModified)
+            @Html.DisplayFor(model => model.job.UserCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.DateModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.UserModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.UserModified)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<table class="table">
+    @foreach (var item in Model.samples)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SampleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateModified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserModified)
+            </td>
+        </tr>
+    }
+</table>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.job.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
