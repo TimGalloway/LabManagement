@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -72,13 +73,15 @@ namespace LabManagementWeb.Controllers
                 db.SaveChanges();
 
                 //Create samples records using SampleIDStart and SampleIDEnd
+                barcodecs objBar = new barcodecs();
                 for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
                 {
                     Sample newSample = new Sample
                     {
                         Job = job,
                         Job_ID = job.ID,
-                        SampleID = sampleLoop
+                        SampleID = sampleLoop,
+                        BarCodeImage = Convert.ToBase64String(objBar.getBarcodeImage(sampleLoop.ToString(), sampleLoop.ToString()))
                     };
                     db.Samples.Add(newSample);
                 }
@@ -212,7 +215,11 @@ namespace LabManagementWeb.Controllers
                 var contents = new Paragraph();
                 contents.Alignment = Element.ALIGN_CENTER;
 
-                contents.Add(new Chunk(string.Format("Thing #{0}\n", sample.SampleID), new Font(baseFont, 11f, Font.BOLD)));
+                byte[] imageBytes = Convert.FromBase64String(sample.BarCodeImage);
+                Image image = Image.GetInstance(imageBytes);
+                contents.Add(image);
+
+                //contents.Add(new Chunk(string.Format("Thing #{0}\n", sample.SampleID), new Font(baseFont, 11f, Font.BOLD)));
                 contents.Add(new Chunk(string.Format("Thing Name: {0}\n", sample.SampleID), new Font(baseFont, 8f)));
 
                 cell.AddElement(contents);

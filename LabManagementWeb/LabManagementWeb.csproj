@@ -287,6 +287,18 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.3.1.10729.1\lib\Zen.Barcode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Zen.Barcode.Design, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.Web.3.1.10729.1\lib\Zen.Barcode.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Zen.Barcode.Web, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.Web.3.1.10729.1\lib\Zen.Barcode.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Zen.Barcode.Web.Mvc, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.Web.3.1.10729.1\lib\Zen.Barcode.Web.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -345,6 +357,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.cs" />
+    <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.Designer.cs">
+      <DependentUpon>201811282256179_changeBarCodeImageToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BarCode39.cs" />
+    <Compile Include="Models\barcodecs.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -398,6 +416,10 @@
     <Compile Include="Migrations\201811241430271_addSampleIDRangeToJob.Designer.cs">
       <DependentUpon>201811241430271_addSampleIDRangeToJob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811281417455_addBarCodeImageToSample.cs" />
+    <Compile Include="Migrations\201811281417455_addBarCodeImageToSample.Designer.cs">
+      <DependentUpon>201811281417455_addBarCodeImageToSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuditLog.cs" />
@@ -449,6 +471,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\fre3of9x.ttf" />
+    <Content Include="fonts\free3of9.ttf" />
+    <Content Include="fonts\IDAutomationHC39M.ttf" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -537,6 +562,7 @@
     <Content Include="Views\Samples\Details.cshtml" />
     <Content Include="Views\Samples\Edit.cshtml" />
     <Content Include="Views\Samples\Index.cshtml" />
+    <Content Include="Views\Samples\Barcode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -576,6 +602,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811241430271_addSampleIDRangeToJob.resx">
       <DependentUpon>201811241430271_addSampleIDRangeToJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811281417455_addBarCodeImageToSample.resx">
+      <DependentUpon>201811281417455_addBarCodeImageToSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811282256179_changeBarCodeImageToString.resx">
+      <DependentUpon>201811282256179_changeBarCodeImageToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

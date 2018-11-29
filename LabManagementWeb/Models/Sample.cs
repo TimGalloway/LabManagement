@@ -10,6 +10,7 @@ namespace LabManagementWeb.Models
         public int ID { get; set; }
         public int SampleID { get; set; }
         public decimal Weight { get; set; }
+        public string BarCodeImage { get; set; }
 
         public int Job_ID { get; set; }
 
