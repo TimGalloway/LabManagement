@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,7 +21,10 @@ namespace LabManagementWeb.Models
 
         public bool Dispose { get; set; }
         public bool Stored { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime StoredUntil { get; set; }
+
         public bool ReturnedToClient { get; set; }
         public string ReturnByCourier { get; set; }
         public string ReturnByCourierAccnt { get; set; }

@@ -8,13 +8,29 @@ using System.Net;
 using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using LabManagementWeb.Helpers;
 using LabManagementWeb.Models;
 using LabManagementWeb.ViewModels;
+using Zen.Barcode;
 
 namespace LabManagementWeb.Controllers
 {
     public class JobsController : Controller
     {
+        //public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        //{
+        //    MemoryStream ms = new MemoryStream();
+        //    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+        //    return ms.ToArray();
+        //}
+
+        //public System.Drawing.Image byteArrayToImage(byte[] byteArrayIn)
+        //{
+        //    MemoryStream ms = new MemoryStream(byteArrayIn);
+        //    System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
+        //    return returnImage;
+        //}
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Jobs
@@ -73,19 +89,23 @@ namespace LabManagementWeb.Controllers
                 db.SaveChanges();
 
                 //Create samples records using SampleIDStart and SampleIDEnd
-                barcodecs objBar = new barcodecs();
                 for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
                 {
+                    Code39BarcodeDraw barcode39 = BarcodeDrawFactory.Code39WithoutChecksum;
+                    System.Drawing.Image img = barcode39.Draw(sampleLoop.ToString(), 40);
+
                     Sample newSample = new Sample
                     {
                         Job = job,
                         Job_ID = job.ID,
                         SampleID = sampleLoop,
-                        BarCodeImage = Convert.ToBase64String(objBar.getBarcodeImage(sampleLoop.ToString(), sampleLoop.ToString()))
-                    };
+                        BarCodeImage = Convert.ToBase64String(Functions.imageToByteArray(img))
+         
+                };
                     db.Samples.Add(newSample);
                 }
                 db.SaveChanges();
+
 
                 return RedirectToAction("Index");
             }
@@ -217,10 +237,9 @@ namespace LabManagementWeb.Controllers
 
                 byte[] imageBytes = Convert.FromBase64String(sample.BarCodeImage);
                 Image image = Image.GetInstance(imageBytes);
-                contents.Add(image);
+                contents.Add(new Chunk(image, 0, 0));
 
-                //contents.Add(new Chunk(string.Format("Thing #{0}\n", sample.SampleID), new Font(baseFont, 11f, Font.BOLD)));
-                contents.Add(new Chunk(string.Format("Thing Name: {0}\n", sample.SampleID), new Font(baseFont, 8f)));
+                contents.Add(new Chunk(string.Format("Sample ID: {0}\n", sample.SampleID), new Font(baseFont, 8f)));
 
                 cell.AddElement(contents);
                 table.AddCell(cell);

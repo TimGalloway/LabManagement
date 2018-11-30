@@ -262,8 +262,19 @@
 </div>
 
 <table class="table">
-    @foreach (var item in Model.samples)
-    {
+    <tr>
+        <th>
+            @Html.DisplayName("Sample ID")
+        </th>
+        <th>
+            @Html.DisplayName("Weight")
+        </th>
+        <th>
+            @Html.DisplayName("Barcode")
+        </th>
+    </tr>
+        @foreach (var item in Model.samples)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SampleID)
@@ -272,26 +283,14 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Job_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserModified)
-            </td>
-            <td>
-                @Html.ActionLink("Barcode", "Barcode", "Samples", new {id = item.ID}, null)
+                @{
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", item.BarCodeImage);
+                }
+                <img src="@imgSrc" height="100" width="100" />
             </td>
         </tr>
     }
-</table>
+    </table>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.job.ID }) |
         @Html.ActionLink("Back to List", "Index")
