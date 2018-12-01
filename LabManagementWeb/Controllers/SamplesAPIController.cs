@@ -116,12 +116,12 @@ namespace LabManagementWeb.Controllers
                 sample.Weight = request.Weight;
                 db.SaveChanges();
 
-                //AuditLog lAuditLog = new AuditLog();
-                //lAuditLog.AuditAction = "Sample Update from RPI";
-                //lAuditLog.AuditUser = "RPI";
-                //lAuditLog.AuditTime = DateTime.Now;
-                //db.AuditLogs.Add(lAuditLog);
-                //db.SaveChanges();
+                AuditLog lAuditLog = new AuditLog();
+                lAuditLog.AuditAction = "Sample Update from RPI - SampleID:"+ sample.SampleID + " Weight:" + sample.Weight;
+                lAuditLog.AuditUser = "RPI";
+                lAuditLog.AuditTime = DateTime.Now;
+                db.AuditLogs.Add(lAuditLog);
+                db.SaveChanges();
 
                 return Ok();
             }
