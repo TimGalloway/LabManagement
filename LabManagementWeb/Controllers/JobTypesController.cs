@@ -6,19 +6,29 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using LabManagementWeb.DAL;
 using LabManagementWeb.Models;
 
 namespace LabManagementWeb.Controllers
 {
     public class JobTypesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IJobTypesRepository jobTypesRepository;
+
+        public JobTypesController()
+        {
+            this.jobTypesRepository = new JobTypesRepository(new ApplicationDbContext());
+        }
+        //private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: JobTypes
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.JobTypes.ToList());
+            var jobTypes = from j in jobTypesRepository.GetJobTypes()
+                           select j;
+            return View(jobTypes.ToList());
+            //return View(db.JobTypes.ToList());
         }
 
         // GET: JobTypes/Details/5
@@ -29,7 +39,8 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobType jobType = db.JobTypes.Find(id);
+            JobType jobType = jobTypesRepository.GetJobTypeByID(id);
+            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -54,8 +65,10 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.JobTypes.Add(jobType);
-                db.SaveChanges();
+                //db.JobTypes.Add(jobType);
+                //db.SaveChanges();
+                jobTypesRepository.InsertJobType(jobType);
+                jobTypesRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -70,7 +83,8 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobType jobType = db.JobTypes.Find(id);
+            JobType jobType = jobTypesRepository.GetJobTypeByID(id);
+            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -88,8 +102,10 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(jobType).State = EntityState.Modified;
-                db.SaveChanges();
+                jobTypesRepository.UpdateJobType(jobType);
+                jobTypesRepository.Save();
+                //db.Entry(jobType).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(jobType);
@@ -103,7 +119,8 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobType jobType = db.JobTypes.Find(id);
+            JobType jobType = jobTypesRepository.GetJobTypeByID(id);
+            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -117,9 +134,12 @@ namespace LabManagementWeb.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            JobType jobType = db.JobTypes.Find(id);
-            db.JobTypes.Remove(jobType);
-            db.SaveChanges();
+            JobType jobType = jobTypesRepository.GetJobTypeByID(id);
+            jobTypesRepository.DeleteJobType(id);
+            jobTypesRepository.Save();
+            //JobType jobType = db.JobTypes.Find(id);
+            //db.JobTypes.Remove(jobType);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -127,7 +147,8 @@ namespace LabManagementWeb.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                jobTypesRepository.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }

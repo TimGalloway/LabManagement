@@ -357,6 +357,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="DAL\IJobTypesRepository.cs" />
+    <Compile Include="DAL\JobTypesRepository.cs" />
     <Compile Include="Helpers\Functions.cs" />
     <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.cs" />
     <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.Designer.cs">
