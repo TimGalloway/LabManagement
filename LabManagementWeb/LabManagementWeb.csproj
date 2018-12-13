@@ -357,8 +357,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="DAL\AuditLogRepository.cs" />
+    <Compile Include="DAL\ClientsRespository.cs" />
+    <Compile Include="DAL\IAuditLogRepository.cs" />
+    <Compile Include="DAL\IClientsRepository.cs" />
+    <Compile Include="DAL\IJobsRepository.cs" />
     <Compile Include="DAL\IJobTypesRepository.cs" />
+    <Compile Include="DAL\ISamplesRepository.cs" />
+    <Compile Include="DAL\JobsRepository.cs" />
     <Compile Include="DAL\JobTypesRepository.cs" />
+    <Compile Include="DAL\SamplesRespository.cs" />
     <Compile Include="Helpers\Functions.cs" />
     <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.cs" />
     <Compile Include="Migrations\201811282256179_changeBarCodeImageToString.Designer.cs">

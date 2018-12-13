@@ -8,6 +8,7 @@ using System.Net;
 using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using LabManagementWeb.DAL;
 using LabManagementWeb.Helpers;
 using LabManagementWeb.Models;
 using LabManagementWeb.ViewModels;
@@ -17,27 +18,24 @@ namespace LabManagementWeb.Controllers
 {
     public class JobsController : Controller
     {
-        //public byte[] imageToByteArray(System.Drawing.Image imageIn)
-        //{
-        //    MemoryStream ms = new MemoryStream();
-        //    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-        //    return ms.ToArray();
-        //}
+        private IJobsRepository jobsRepository;
+        private ISamplesRepository samplesRepository;
+        private IJobTypesRepository jobTypesRepository;
 
-        //public System.Drawing.Image byteArrayToImage(byte[] byteArrayIn)
-        //{
-        //    MemoryStream ms = new MemoryStream(byteArrayIn);
-        //    System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
-        //    return returnImage;
-        //}
-
-        private ApplicationDbContext db = new ApplicationDbContext();
+        public JobsController()
+        {
+            this.jobsRepository = new JobsRepository(new ApplicationDbContext());
+            this.samplesRepository = new SamplesRespository(new ApplicationDbContext());
+            this.jobTypesRepository = new JobTypesRepository(new ApplicationDbContext());
+        }
 
         // GET: Jobs
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Jobs.ToList());
+            var jobs = from j in jobsRepository.GetJobs()
+                       select j;
+            return View(jobs.ToList());
         }
 
         // GET: Jobs/Details/5
@@ -48,12 +46,12 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+            Job job = jobsRepository.GetJobByID(id);
             if (job == null)
             {
                 return HttpNotFound();
             }
-            List<Sample> samples = db.Samples.Where(a => a.Job_ID == id).ToList();
+            List<Sample> samples = samplesRepository.GetSamplesforJob(id).ToList();
 
             JobsSamplesViewModel jobsSamplesViewModel = new JobsSamplesViewModel();
             jobsSamplesViewModel.job = job;
@@ -65,7 +63,7 @@ namespace LabManagementWeb.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var jobTypeList = (from jt in db.JobTypes select jt);
+            var jobTypeList = jobTypesRepository.GetJobTypes();
             ViewBag.JobTypesList = new SelectList(jobTypeList, "Id", "Description");
 
             return View();
@@ -81,12 +79,12 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                job.JobType = db.JobTypes.Find(job.JobType_ID);
-                db.Jobs.Add(job);
-                db.SaveChanges();
+                job.JobType = jobTypesRepository.GetJobTypeByID(job.JobType_ID);
+                jobsRepository.InsertJob(job);
+                jobsRepository.Save();
 
                 job.JobNumber = job.JobType.Prefix + job.ID;
-                db.SaveChanges();
+                jobsRepository.Save();
 
                 //Create samples records using SampleIDStart and SampleIDEnd
                 for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
@@ -101,10 +99,10 @@ namespace LabManagementWeb.Controllers
                         SampleID = sampleLoop,
                         BarCodeImage = Convert.ToBase64String(Functions.imageToByteArray(img))
          
-                };
-                    db.Samples.Add(newSample);
+                    };
+                    samplesRepository.InsertSample(newSample);
                 }
-                db.SaveChanges();
+                samplesRepository.Save();
 
 
                 return RedirectToAction("Index");
@@ -121,12 +119,12 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+            Job job = jobsRepository.GetJobByID(id);
             if (job == null)
             {
                 return HttpNotFound();
             }
-            var jobTypeList = (from jt in db.JobTypes select jt);
+            var jobTypeList = jobTypesRepository.GetJobTypes();
             ViewBag.JobTypesList = new SelectList(jobTypeList, "Id", "Description");
 
             return View(job);
@@ -142,12 +140,13 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                job.JobType = db.JobTypes.Find(job.JobType_ID);
-                db.Entry(job).State = EntityState.Modified;
-                db.SaveChanges();
+                job.JobType = jobTypesRepository.GetJobTypeByID(job.JobType_ID);
+                jobsRepository.UpdateJob(job);
+                jobsRepository.Save();
 
                 job.JobNumber = job.JobType.Prefix + job.ID;
-                db.SaveChanges();
+                jobsRepository.UpdateJob(job);
+                jobsRepository.Save();
 
                 //Create samples records using SampleIDStart and SampleIDEnd
                 for (int sampleLoop = job.SampleIDStart; sampleLoop <= job.SampleIDEnd; sampleLoop++)
@@ -158,13 +157,13 @@ namespace LabManagementWeb.Controllers
                         Job_ID = job.ID,
                         SampleID = sampleLoop
                     };
-                    Sample testSample = (Sample) db.Samples.Where(a => a.SampleID == sampleLoop).FirstOrDefault<Sample>();
+                    Sample testSample = samplesRepository.GetSampleByID(sampleLoop);
                     if (testSample == null)
                     {
-                        db.Samples.Add(newSample);
+                        samplesRepository.InsertSample(newSample);
                     }
                 }
-                db.SaveChanges();
+                samplesRepository.Save();
 
                 return RedirectToAction("Index");
             }
@@ -179,7 +178,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+            Job job = jobsRepository.GetJobByID(id);
             if (job == null)
             {
                 return HttpNotFound();
@@ -193,9 +192,9 @@ namespace LabManagementWeb.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Job job = db.Jobs.Find(id);
-            db.Jobs.Remove(job);
-            db.SaveChanges();
+            Job job = jobsRepository.GetJobByID(id);
+            jobsRepository.DeleteJob(job.ID);
+            jobsRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -222,9 +221,7 @@ namespace LabManagementWeb.Controllers
 
             var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
 
-            var samples = (from s in db.Samples
-                           where s.Job_ID == id
-                           select s).ToList();
+            var samples = samplesRepository.GetSamplesforJob(id).ToList();
             foreach (var sample in samples)
             {
                 PdfPCell cell = new PdfPCell();
@@ -262,7 +259,7 @@ namespace LabManagementWeb.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                jobsRepository.Dispose();
             }
             base.Dispose(disposing);
         }

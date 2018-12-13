@@ -19,7 +19,6 @@ namespace LabManagementWeb.Controllers
         {
             this.jobTypesRepository = new JobTypesRepository(new ApplicationDbContext());
         }
-        //private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: JobTypes
         [Authorize]
@@ -28,7 +27,6 @@ namespace LabManagementWeb.Controllers
             var jobTypes = from j in jobTypesRepository.GetJobTypes()
                            select j;
             return View(jobTypes.ToList());
-            //return View(db.JobTypes.ToList());
         }
 
         // GET: JobTypes/Details/5
@@ -40,7 +38,6 @@ namespace LabManagementWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             JobType jobType = jobTypesRepository.GetJobTypeByID(id);
-            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -65,8 +62,6 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.JobTypes.Add(jobType);
-                //db.SaveChanges();
                 jobTypesRepository.InsertJobType(jobType);
                 jobTypesRepository.Save();
                 return RedirectToAction("Index");
@@ -84,7 +79,6 @@ namespace LabManagementWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             JobType jobType = jobTypesRepository.GetJobTypeByID(id);
-            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -104,8 +98,6 @@ namespace LabManagementWeb.Controllers
             {
                 jobTypesRepository.UpdateJobType(jobType);
                 jobTypesRepository.Save();
-                //db.Entry(jobType).State = EntityState.Modified;
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(jobType);
@@ -120,7 +112,6 @@ namespace LabManagementWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             JobType jobType = jobTypesRepository.GetJobTypeByID(id);
-            //JobType jobType = db.JobTypes.Find(id);
             if (jobType == null)
             {
                 return HttpNotFound();
@@ -137,9 +128,6 @@ namespace LabManagementWeb.Controllers
             JobType jobType = jobTypesRepository.GetJobTypeByID(id);
             jobTypesRepository.DeleteJobType(id);
             jobTypesRepository.Save();
-            //JobType jobType = db.JobTypes.Find(id);
-            //db.JobTypes.Remove(jobType);
-            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -148,7 +136,6 @@ namespace LabManagementWeb.Controllers
             if (disposing)
             {
                 jobTypesRepository.Dispose();
-                //db.Dispose();
             }
             base.Dispose(disposing);
         }

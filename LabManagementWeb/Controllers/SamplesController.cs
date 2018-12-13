@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using LabManagementWeb.DAL;
 using LabManagementWeb.Models;
 using Zen.Barcode;
 
@@ -16,12 +17,19 @@ namespace LabManagementWeb.Controllers
 {
     public class SamplesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ISamplesRepository samplesRepository;
+
+        public SamplesController()
+        {
+            this.samplesRepository = new SamplesRespository(new ApplicationDbContext());
+        }
 
         // GET: Samples
         public ActionResult Index()
         {
-            return View(db.Samples.ToList());
+            var samples = from s in samplesRepository.GetSamples()
+                          select s;
+            return View(samples.ToList());
         }
 
         // GET: Samples/Details/5
@@ -31,7 +39,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sample sample = db.Samples.Find(id);
+            Sample sample = samplesRepository.GetSampleByID(id);
             if (sample == null)
             {
                 return HttpNotFound();
@@ -54,8 +62,8 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Samples.Add(sample);
-                db.SaveChanges();
+                samplesRepository.InsertSample(sample);
+                samplesRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +77,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sample sample = db.Samples.Find(id);
+            Sample sample = samplesRepository.GetSampleByID(id);
             if (sample == null)
             {
                 return HttpNotFound();
@@ -86,8 +94,8 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sample).State = EntityState.Modified;
-                db.SaveChanges();
+                samplesRepository.UpdateSample(sample);
+                samplesRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(sample);
@@ -100,7 +108,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sample sample = db.Samples.Find(id);
+            Sample sample = samplesRepository.GetSampleByID(id);
             if (sample == null)
             {
                 return HttpNotFound();
@@ -113,9 +121,9 @@ namespace LabManagementWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Sample sample = db.Samples.Find(id);
-            db.Samples.Remove(sample);
-            db.SaveChanges();
+            Sample sample = samplesRepository.GetSampleByID(id);
+            samplesRepository.DeleteSample(id);
+            samplesRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -123,7 +131,7 @@ namespace LabManagementWeb.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                samplesRepository.Dispose();
             }
             base.Dispose(disposing);
         }

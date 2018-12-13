@@ -6,19 +6,27 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using LabManagementWeb.DAL;
 using LabManagementWeb.Models;
 
 namespace LabManagementWeb.Controllers
 {
     public class ClientsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IClientsRepository clientsRepository;
+
+        public ClientsController()
+        {
+            this.clientsRepository = new ClientsRepository(new ApplicationDbContext());
+        }
 
         // GET: Clients
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Clients.ToList());
+            var clients = from j in clientsRepository.GetClients()
+                           select j;
+            return View(clients.ToList());
         }
 
         // GET: Clients/Details/5
@@ -29,7 +37,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = clientsRepository.GetClientByID(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -54,8 +62,8 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clients.Add(client);
-                db.SaveChanges();
+                clientsRepository.InsertClient(client);
+                clientsRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -70,7 +78,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = clientsRepository.GetClientByID(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -88,8 +96,8 @@ namespace LabManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
+                clientsRepository.UpdateClient(client);
+                clientsRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(client);
@@ -103,7 +111,7 @@ namespace LabManagementWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = clientsRepository.GetClientByID(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -117,9 +125,9 @@ namespace LabManagementWeb.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Client client = db.Clients.Find(id);
-            db.Clients.Remove(client);
-            db.SaveChanges();
+            Client client = clientsRepository.GetClientByID(id);
+            clientsRepository.DeleteClient(id);
+            clientsRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -127,7 +135,7 @@ namespace LabManagementWeb.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                clientsRepository.Dispose();
             }
             base.Dispose(disposing);
         }
