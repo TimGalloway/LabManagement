@@ -19,13 +19,13 @@ namespace LabManagementWeb.Controllers
     public class JobsController : Controller
     {
         private IJobsRepository jobsRepository;
-        private ISamplesRepository samplesRepository;
+        //private ISamplesRepository samplesRepository;
         private IJobTypesRepository jobTypesRepository;
 
         public JobsController()
         {
             this.jobsRepository = new JobsRepository(new ApplicationDbContext());
-            this.samplesRepository = new SamplesRespository(new ApplicationDbContext());
+            //this.samplesRepository = new SamplesRespository(new ApplicationDbContext());
             this.jobTypesRepository = new JobTypesRepository(new ApplicationDbContext());
         }
 
@@ -86,23 +86,23 @@ namespace LabManagementWeb.Controllers
                 job.JobNumber = job.JobType.Prefix + job.ID;
                 jobsRepository.Save();
 
-                //Create samples records using SampleIDStart and SampleIDEnd
-                for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
-                {
-                    Code39BarcodeDraw barcode39 = BarcodeDrawFactory.Code39WithoutChecksum;
-                    System.Drawing.Image img = barcode39.Draw(sampleLoop.ToString(), 40);
+                ////Create samples records using SampleIDStart and SampleIDEnd
+                //for (int sampleLoop = job.SampleIDStart;sampleLoop <= job.SampleIDEnd; sampleLoop++)
+                //{
+                //    Code39BarcodeDraw barcode39 = BarcodeDrawFactory.Code39WithoutChecksum;
+                //    System.Drawing.Image img = barcode39.Draw(sampleLoop.ToString(), 40);
 
-                    Sample newSample = new Sample
-                    {
-                        Job = job,
-                        Job_ID = job.ID,
-                        SampleID = sampleLoop,
-                        BarCodeImage = Convert.ToBase64String(Functions.imageToByteArray(img))
+                //    Sample newSample = new Sample
+                //    {
+                //        Job = job,
+                //        Job_ID = job.ID,
+                //        SampleID = sampleLoop,
+                //        BarCodeImage = Convert.ToBase64String(Functions.imageToByteArray(img))
          
-                    };
-                    samplesRepository.InsertSample(newSample);
-                }
-                samplesRepository.Save();
+                //    };
+                //    samplesRepository.InsertSample(newSample);
+                //}
+                //samplesRepository.Save();
 
 
                 return RedirectToAction("Index");

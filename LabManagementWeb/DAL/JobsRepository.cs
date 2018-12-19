@@ -1,15 +1,20 @@
-﻿using LabManagementWeb.Models;
+﻿using LabManagementWeb.Helpers;
+using LabManagementWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Zen.Barcode;
 
 namespace LabManagementWeb.DAL
 {
     public class JobsRepository :IJobsRepository, IDisposable
     {
         private ApplicationDbContext context;
+        private ISamplesRepository samplesRepository;
+        private IJobTypesRepository jobTypesRepository;
+
 
         public JobsRepository(ApplicationDbContext context)
         {
@@ -27,7 +32,27 @@ namespace LabManagementWeb.DAL
 
         public void InsertJob(Job job)
         {
+            this.samplesRepository = new SamplesRespository(context);
+
             context.Jobs.Add(job);
+
+            //Create samples records using SampleIDStart and SampleIDEnd
+            for (int sampleLoop = job.SampleIDStart; sampleLoop <= job.SampleIDEnd; sampleLoop++)
+            {
+                Code39BarcodeDraw barcode39 = BarcodeDrawFactory.Code39WithoutChecksum;
+                System.Drawing.Image img = barcode39.Draw(sampleLoop.ToString(), 40);
+
+                Sample newSample = new Sample
+                {
+                    Job = job,
+                    Job_ID = job.ID,
+                    SampleID = sampleLoop,
+                    BarCodeImage = Convert.ToBase64String(Functions.imageToByteArray(img))
+
+                };
+                samplesRepository.InsertSample(newSample);
+            }
+            samplesRepository.Save();
         }
 
         public void DeleteJob(int jobID)
