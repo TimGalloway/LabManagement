@@ -14,5 +14,13 @@ namespace LabManagementWeb.Controllers
             var nav = new Navbar();
             return PartialView("_topNav", nav.NavbarTop());
         }
+
+        // GET: Navbar
+        public ActionResult LeftNav()
+        {
+            var nav = new Navbar();
+            return PartialView("_LeftNav", nav.NavbarTop());
+        }
+
     }
 }

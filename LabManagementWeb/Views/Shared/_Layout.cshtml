@@ -7,10 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/Nav")
 
 </head>
 <body>
-    @Html.Action("TopNav", "Navigation")
+    @Html.Action("LeftNav", "Navigation")
 
     <div class="container body-content">
         @RenderBody()

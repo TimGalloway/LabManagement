@@ -27,6 +27,9 @@ namespace LabManagementWeb
                       "~/Content/navbar-fixed-top.css",
                       "~/Content/Site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Nav").Include(
+          "~/Scripts/Nav.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/Custom").Include(
                       "~/Scripts/Clients.js"));
         }
