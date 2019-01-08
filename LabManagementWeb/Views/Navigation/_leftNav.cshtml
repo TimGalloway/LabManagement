@@ -1,27 +1,28 @@
 ﻿@model IEnumerable<NavbarItem>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                @foreach (var item in Model)
-                {
-                    if (!item.isParent && item.parentId == -1)
+    @foreach (var item in Model)
+    {
+        if (!item.isParent && item.parentId == -1)
+        {
+            <a href="@Url.Action(item.action,item.controller)">@item.nameOption</a>
+        }
+        else if (item.isParent && item.parentId == -1)
+        {
+            var childItems = Model.Where(p => p.parentId == item.Id).ToList();
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action(item.action,item.controller)">
+                    @item.nameOption
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @foreach (var ch in childItems)
                     {
-                        <a href="@Url.Action(item.action,item.controller)">@item.nameOption</a>
+                        <li><a href="@Url.Action(ch.action,ch.controller)">@ch.nameOption</a></li>
                     }
-                    else if (item.isParent && item.parentId == -1)
-                    {
-                        var childItems = Model.Where(p => p.parentId == item.Id).ToList();
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action(item.action,item.controller)">
-                                @item.nameOption
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                @foreach (var ch in childItems)
-                                {
-                                    <li><a href="@Url.Action(ch.action,ch.controller)">@ch.nameOption</a></li>
-                                }
-                            </ul>
-                        </li>
-                    }
-                }
+                </ul>
+            </li>
+        }
+    }
+    @Html.Partial("_LoginPartialLeft")
 </div>
