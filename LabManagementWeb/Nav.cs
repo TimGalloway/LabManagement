@@ -21,8 +21,9 @@ namespace LabManagementWeb
         public IEnumerable<NavbarItem> NavbarTop()
         {
             var topNav = new List<NavbarItem>();
-            topNav.Add(new NavbarItem() { Id = 1, action = "About", nameOption = "About", controller = "Home", isParent = false, parentId = -1 });
-            topNav.Add(new NavbarItem() { Id = 2, action = "Contact", nameOption = "Contact", controller = "Home", isParent = false, parentId = -1 });
+            topNav.Add(new NavbarItem() { Id = 1, action = "Index", nameOption = "Home", controller = "Home", isParent = false, parentId = -1 });
+            topNav.Add(new NavbarItem() { Id = 2, action = "About", nameOption = "About", controller = "Home", isParent = false, parentId = -1 });
+            topNav.Add(new NavbarItem() { Id = 3, action = "Contact", nameOption = "Contact", controller = "Home", isParent = false, parentId = -1 });
             //// drop down Menu 
             //topNav.Add(new NavbarItem() { Id = 3, action = "Reports", nameOption = "Reports", controller = "ReportGen", isParent = true, parentId = -1 });
             //topNav.Add(new NavbarItem() { Id = 4, action = "SummaryReport", nameOption = "Overall Summary", controller = "ReportGen", isParent = false, parentId = 3 });
