@@ -6,6 +6,21 @@
     background-repeat: no-repeat;
 }
 
+h2{
+    color: white;
+}
+
+a{
+    color:white;
+}
+
+.table{
+    color:white;
+}
+.control-label{
+    color: white;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -17,6 +32,21 @@
     margin-left: 0px;
 }
 
+.inner-body-content{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.8)!important;
+    margin-left:30px;
+}
+
+.form-control{
+    border-radius: 6px;
+}
+.btn-login, .btn-login:focus, .btn-login:hover{
+    color: #000;
+    background-color: #F0AD4E;
+    border-color: #F0AD4E;
+    width:100%;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

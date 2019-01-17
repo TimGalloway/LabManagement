@@ -15,8 +15,9 @@
 
     <div class="container body-content">
         <span style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span>
-        @RenderBody()
-        <hr />
+        <div class="container inner-body-content">
+            @RenderBody()
+        </div>
         <footer class="footer">
             <p>&copy; @DateTime.Now.Year - LabManagement</p>
         </footer>
